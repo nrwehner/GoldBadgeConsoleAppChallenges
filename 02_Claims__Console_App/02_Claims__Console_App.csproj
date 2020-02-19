@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{34A19A95-6329-4093-A0B7-E801824F9592}</ProjectGuid>
+    <ProjectGuid>{63035F34-E2AC-46BB-AA9B-E8449997B5F2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_01_Cafe_Console_App</RootNamespace>
-    <AssemblyName>01_Cafe_Console_App</AssemblyName>
+    <RootNamespace>_02_Claims__Console_App</RootNamespace>
+    <AssemblyName>02_Claims__Console_App</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,10 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuItem.cs" />
-    <Compile Include="ProgramUI.cs" />
-    <Compile Include="Repo.cs" />
+    <Compile Include="Claim.cs" />
+    <Compile Include="ClaimRepo.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

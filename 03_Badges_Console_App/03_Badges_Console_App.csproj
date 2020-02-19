@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{34A19A95-6329-4093-A0B7-E801824F9592}</ProjectGuid>
+    <ProjectGuid>{C0BF0107-C41D-4C96-905D-52C9E0B563B9}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_01_Cafe_Console_App</RootNamespace>
-    <AssemblyName>01_Cafe_Console_App</AssemblyName>
+    <RootNamespace>_03_Badges_Console_App</RootNamespace>
+    <AssemblyName>03_Badges_Console_App</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuItem.cs" />
-    <Compile Include="ProgramUI.cs" />
-    <Compile Include="Repo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
