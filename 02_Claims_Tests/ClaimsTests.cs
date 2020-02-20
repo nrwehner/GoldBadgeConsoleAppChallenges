@@ -6,7 +6,7 @@ namespace _02_Claims_Tests
 {
     //5. Unit Tests - test all methods
 
-    [TestClass]
+    /*[TestClass]
     public class ClaimsTests
     {
         [TestMethod]
@@ -60,12 +60,12 @@ namespace _02_Claims_Tests
             repo.AddClaimToRepo(claim);
             repo.AddClaimToRepo(claimTwo);
             Console.WriteLine(repo.DeQueueNextClaim());
-        }*/
+        }
         [TestMethod]
         public void MyTestMethod()
         {
             ClaimRepo repo = new ClaimRepo();
             repo._claimRepo.Peek();
         }
-    }
+    }*/
 }

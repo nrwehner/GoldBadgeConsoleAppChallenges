@@ -10,11 +10,80 @@ namespace _03_Badges_Console_App
     {
         static void Main(string[] args)
         {
+            ProgramUI ui = new ProgramUI();
+            ui.RunMenu();
         }
     }
 }
 
 /*
+ * My Summary:
+ * 
+ * 1 badge class                                        DONE
+ *      constructors
+ *      badge ID prop
+ *      door names accesible prop (a list?)
+ *      method to add door names to the list?
+ *  
+ *2  badge repo                                         DONE
+ *     dictionary of badges
+ *          key is badge id
+ *          value is list of door names
+ *     method to add a badge to the dict
+ *          
+ * 3 program                                            DONE
+ *      instance of programui
+ *      run the runmenu method
+ *      
+ * 4 programui                                          DONE
+ *      runmenu method
+ *              Hello Security Admin, What would you like to do?
+    
+                Add a badge
+                Edit a badge.
+                List all Badges
+ *      create a new badge
+ *              #1 Add a badge
+                What is the number on the badge: 12345
+
+                List a door that it needs access to: A5
+
+                Any other doors(y/n)? y
+
+                List a door that it needs access to: A7
+
+                Any other doors(y/n)? n
+
+                (Return to main menu.)
+ *      update doors on a badge
+ *              #2 Update a badge
+                What is the badge number to update? 12345
+
+                12345 has access to doors A5 & A7.
+
+                What would you like to do?
+
+                Remove a door
+                Add a door
+                > 1
+
+                Which door would you like to remove? A5
+
+                Door removed.
+
+                12345 has access to door A7.
+ *      delete all doors from a badge
+ *      show list of all badge numbers and door access
+ *              #3 List all badges view
+                Key	
+                Badge #	Door Access
+                12345	A7
+                22345	A1, A4, B1, B2
+                32345	A4, A5
+ *              
+ * 
+ * 5 test methods
+ *      
  * Challenge 3: Badges
 Komodo Insurance
 Komodo Insurance is fixing their badging system.
