@@ -92,6 +92,7 @@ namespace _03_Badges_Console_App
                 }
             }
         }
+
         /*
          * create a new badge
  *              #1 Add a badge
@@ -115,25 +116,30 @@ namespace _03_Badges_Console_App
             Console.WriteLine("You are adding a new badge.\n"+"\n");
             Console.WriteLine("What is the number on the badge?\n");
             string addBadgeID = Console.ReadLine();
-            if (_badgeRepo.DoesBadgeIDExist(addBadgeID)==false)
+
+            if (_badgeRepo.DoesBadgeIDExist(addBadgeID)==false)//BADGE EXIST IF
             {
             badge.BadgeID = addBadgeID;
             badge.DoorAccessList = new List<string>();
-            while (addNewDoor)
+
+            while (addNewDoor)//ADD DOOR WHILE
             {
             Console.WriteLine($"\nList a door that badge {badge.BadgeID} needs access to:\n");
             badge.AddDoorToAccessList(Console.ReadLine());
             Console.WriteLine("\nAny other doors(y/n)?\n");
             string userYesNo = Console.ReadLine();
-                if (userYesNo == "n")
+
+                if (userYesNo == "n")//WANT TO ADD DOOR IF
                 {
                     addNewDoor = false;
                 }
-                else if (userYesNo == "y")
+
+                else if (userYesNo == "y")//WANT TO ADD DOOR ELSE IF
                 {
 
                 }
-                else
+
+                else//WANT TO ADD DOOR ELSE
                 {
                     addNewDoor = false;
                     Console.WriteLine("\nYou did not provide y or n. Your badge will now be created.\n"+
@@ -143,15 +149,18 @@ namespace _03_Badges_Console_App
                 }
             }
             _badgeRepo.AddBadgeToRepo(badge);
-            Console.WriteLine($"\nBadge {badge.BadgeID} has been created with the accessible doors you provided. Press any key to continue.");
+            Console.WriteLine($"\nBadge {badge.BadgeID} has been created with the accessible doors you provided. " +
+                $"Press any key to continue.");
             Console.ReadKey();
             }
-            else
+
+            else//BADGE EXIST ELSE
             {
                 Console.WriteLine("That Badge ID already exists.  Please try again from the Main Menu\n");
                 Console.ReadKey();
             }
         }
+
         /*
          *       update doors on a badge
  *              #2 Update a badge
@@ -177,17 +186,20 @@ namespace _03_Badges_Console_App
             Console.WriteLine("You are making changes to a badge.\n" +
                 "Would you like to continue? y/n\n");
             string userYesNo = Console.ReadLine();
-            if (userYesNo == "y")
+
+            if (userYesNo == "y")//WANT TO BADGE CHANGE IF
             {
                 Console.WriteLine("Please provide a badge ID that you would like to make changes to.");
                 string badgeChanged = Console.ReadLine();
-                if (_badgeRepo.DoesBadgeIDExist(badgeChanged))
+
+                if (_badgeRepo.DoesBadgeIDExist(badgeChanged))//BADGE EXIST IF
                 {
                     Console.WriteLine($"What would you like to do to badge {badgeChanged}?\n" +
                         $"Add door access (enter 1)\n" +
                         $"Remove door access (enter 2)\n");
                     string userChoice = Console.ReadLine();
-                    if (userChoice == "1")
+
+                    if (userChoice == "1")//USER CHANGE CHOICE IF
                     {
                         KeyValuePair<string,List<string>> badge = _badgeRepo.GetBadgeByBadgeID(badgeChanged);
                         string listString = string.Join(",", badge.Value.ToArray());
@@ -201,7 +213,8 @@ namespace _03_Badges_Console_App
                             $"Press any key to continue.");
                         Console.ReadKey();
                     }
-                    else if (userChoice == "2")
+
+                    else if (userChoice == "2")//USER CHANGE CHOICE ELSE IF
                     {
                         KeyValuePair<string, List<string>> badge = _badgeRepo.GetBadgeByBadgeID(badgeChanged);
                         string listString = string.Join(",", badge.Value.ToArray());
@@ -209,10 +222,12 @@ namespace _03_Badges_Console_App
                             $"Which door would you like to REMOVE access for?\n");
                         string doorRemove = Console.ReadLine();
                         bool doorRemoveExists = _badgeRepo.GetBadgeByBadgeID(badgeChanged).Value.Contains(doorRemove);
-                        if (doorRemoveExists)
+
+                        if (doorRemoveExists)//NEW DOOR EXISTS IF
                         {
                         bool removeSuccess = _badgeRepo.GetBadgeByBadgeID(badgeChanged).Value.Remove(doorRemove);
-                            if (removeSuccess)
+
+                            if (removeSuccess)//REMOVE SUCCESS IF
                             {
                                 string listStringAfter = string.Join(",", badge.Value.ToArray());
                                 Console.WriteLine($"Door {doorRemove} has been removed from badge {badgeChanged}.\n" +
@@ -220,40 +235,46 @@ namespace _03_Badges_Console_App
                                     $"Press any key to continue.");
                                 Console.ReadKey();
                             }
-                            else
+
+                            else//REMOVE SUCCESS ELSE
                             {
                                 Console.WriteLine("Something went wrong. You will return to the Main Menu Now.\n" +
                                     "Press any key to continue\n");
                                 Console.ReadLine();
                             }
                         }
-                        else
+
+                        else//NEW DOOR EXISTS ELSE
                         {
                             Console.WriteLine($"Badge {badgeChanged} already does not have access to door {doorRemove}.\n" +
                                 $"You will now return to the Main Menu. Press any key to continue\n");
                             Console.ReadLine();
                         }
                     }
-                    else
+
+                    else//USER CHANGE CHOICE ELSE
                     {
                         Console.WriteLine("You did not enter 1 or 2. You will return to the Main Menu now where you can try option 2 again.\n" +
                             "Press any key to continue\n");
                         Console.ReadKey();
                     }
                 }
-                else
+
+                else//BADGE EXIST ELSE
                 {
                     Console.WriteLine($"Badge {badgeChanged} does not exist. You will return to the Main Menu now.\n"+
                         "Press any key to continue");
                     Console.ReadKey();
                 }
             }
-            else if (userYesNo == "n")
+
+            else if (userYesNo == "n")//WANT TO BADGE CHANGE ELSE IF
             {
                 Console.WriteLine("You will now return to the Main Menu. Press any key to continue.");
                 Console.ReadKey();
             }
-            else
+
+            else//WANT TO BADGE CHANGE ELSE
             {
                 Console.WriteLine("\nYou did not provide y or n. You will now be returned to the Main Menu.\n" +
                         "If you need to update a badge, try option 2 again from the Main Menu.\n" +
@@ -261,37 +282,43 @@ namespace _03_Badges_Console_App
                 Console.ReadKey();
             }
         }
+
         public void DeleteBadge()
         {
             Console.Clear();
             Console.WriteLine("You are removing a badge.\n" +
                 "Would you like to continue? y/n\n");
             string userYesNo = Console.ReadLine();
-            if (userYesNo == "y")
+
+            if (userYesNo == "y")//WANT TO REMOVE IF
             {
                 Console.WriteLine("Please provide a badge ID that you would like to remove.");
                 string badgeRemoveDoors = Console.ReadLine();
                 KeyValuePair<string, List<string>> clearedBadge = _badgeRepo.GetBadgeByBadgeID(badgeRemoveDoors);
                 bool success = _badgeRepo.DeleteBadge(badgeRemoveDoors);
-                if (success)
+
+                if (success)//DELETE SUCCESS IF
                 {
                     Console.WriteLine($"You have removed badge {clearedBadge.Key}.\n" +
                         $"Press any key to continue.");
                     Console.ReadKey();
                 }
-                else
+
+                else//DELETE SUCCES ELSE
                 {
                     Console.WriteLine("Something went wrong.  You will return to the Main Menu and can try again.\n" +
                         "Press any key to continue");
                     Console.ReadKey();
                 }
             }
-            else if (userYesNo == "n")
+
+            else if (userYesNo == "n")//WANT TO REMOVE ELSE IF
             {
                 Console.WriteLine("You will now return to the Main Menu. Press any key to continue.");
                 Console.ReadKey();
             }
-            else
+
+            else//WANT TO REMOVE ELSE
             {
                 Console.WriteLine("\nYou did not provide y or n. You will now be returned to the Main Menu.\n" +
                         "If you need to remove a badge, try option 3 again from the Main Menu.\n" +
@@ -299,6 +326,7 @@ namespace _03_Badges_Console_App
                 Console.ReadKey();
             }
         }
+
         /*
          * show list of all badge numbers and door access
  *              #3 List all badges view
@@ -308,18 +336,21 @@ namespace _03_Badges_Console_App
                 22345	A1, A4, B1, B2
                 32345	A4, A5
          * */
+
         public void ListAllBadges()
         {
             Console.Clear();
             Dictionary<string,List<string>> directory = _badgeRepo.GetAllBadges();
             Console.WriteLine(String.Format("|{0,15}|{1,30}|","Badge #", "Door Access"));
             Console.WriteLine(String.Format("|{0,15}|{1,30}|","---------------", "------------------------------"));
+
             foreach (KeyValuePair<string,List<string>> badge in directory)
             {
                 string listString = string.Join(",", badge.Value.ToArray());
                 Console.WriteLine(String.Format("|{0,15}|{1,30}|",$"{badge.Key}", $"{listString}"));
                 Console.WriteLine(String.Format("|{0,15}|{1,30}|","---------------", "------------------------------"));
             }
+
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }

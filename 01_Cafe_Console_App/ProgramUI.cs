@@ -79,32 +79,37 @@ namespace _01_Cafe_Console_App
             Console.Clear();
             Console.WriteLine("Please provide a Meal Number of the meal you would like to remove.");
             string deleteMeal = Console.ReadLine();
-            if (repo.GetMenuItemByMealNumber(deleteMeal) != null)
+
+            if (repo.GetMenuItemByMealNumber(deleteMeal) != null)//MEAL EXISTS IF
             {
                 string storedDeleteValues = $"{repo.GetMenuItemByMealNumber(deleteMeal).MealNumber}: " +
                     $"{repo.GetMenuItemByMealNumber(deleteMeal).MealName}, " +
                     $"{repo.GetMenuItemByMealNumber(deleteMeal).Description}, " +
                     $"{repo.GetMenuItemByMealNumber(deleteMeal).IngredientList}, " +
                     $"{repo.GetMenuItemByMealNumber(deleteMeal).Price}. ";
-            bool isDeleted = repo.DeleteMenuItem(deleteMeal);
-                if (isDeleted)
+                bool isDeleted = repo.DeleteMenuItem(deleteMeal);
+
+                if (isDeleted)//DELETE SUCCESS IF
                 {
                     Console.WriteLine($"You deleted the following Menu Item:\n" +
                         $"{storedDeleteValues}\n Press any key to continue...");
                     Console.ReadKey();
                 }
-                else
+
+                else//DELETE SUCCESS ELSE
                 {
                     Console.WriteLine("Something went wrong.  Press any key to continue.");
                     Console.ReadKey();
                 }
             }
-            else
+
+            else//MEAL EXISTS ELSE
             {
                 Console.WriteLine("That Menu Item does not exist.  Press any key to continue.");
                 Console.ReadKey();
             }
         }
+
         public void ShowAllMenuItems()
         {
             Console.Clear();
@@ -118,6 +123,7 @@ namespace _01_Cafe_Console_App
                 $"Ingredients: {item.IngredientList}\n"+
                 $"Price: {item.Price}\n");
             }
+
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }

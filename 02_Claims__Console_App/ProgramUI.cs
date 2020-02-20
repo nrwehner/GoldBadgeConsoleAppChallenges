@@ -108,7 +108,7 @@ namespace _02_Claims__Console_App
             Console.WriteLine("Enter a Claim Description:");
             claim.Description = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("Amount of Damage:\n");
+            Console.WriteLine("Amount of Damage (#s only):\n");
                 Console.Write("$");
             string damageAmount = Console.ReadLine();
             claim.ClaimAmount = Convert.ToDouble(damageAmount);
@@ -148,6 +148,7 @@ namespace _02_Claims__Console_App
                         "Press any key to continue.");
                         Console.ReadKey();
              }
+
            else//CLAIMDATE ENTRY ELSE
             {
                 claim.DateOfClaim = userClaimDate;
@@ -168,43 +169,49 @@ namespace _02_Claims__Console_App
         {
             Console.Clear();
             bool areClaims = repo.DisplayNextClaim();
-            if (areClaims)
+            if (areClaims)//CLAIMS EXIST IF
             {
             Console.WriteLine("\nDo you want to deal with this claim now (y/n)?\n");
             string userChoice = Console.ReadLine();
-            if (userChoice == "n")
+
+            if (userChoice == "n")//DEAL WITH CLAIM IF
             {
                 Claim nextClaim = repo._claimRepo.Peek();
                 Console.WriteLine($"Claim {nextClaim.ClaimID} will remain next in queue.  Press any key to continue.");
                 Console.ReadKey();
             }
-            else if (userChoice == "y")
+
+            else if (userChoice == "y")//DEAL WITH CLAIM ELSE IF
             {
                 Claim nextClaim = repo._claimRepo.Peek();
                 repo._claimRepo.Dequeue();
                 bool areThereClaims = (repo._claimRepo.Count != 0) ? true : false;
-                    if (areThereClaims)
+
+                    if (areThereClaims)//NEW CLAIMS EXIST IF
                     {
                 Claim newNextClaim = repo._claimRepo.Peek();
                 Console.WriteLine($"Claim {nextClaim.ClaimID} has been removed from queue.  The next claim is now claim {newNextClaim.ClaimID}.\n" +
                     $"Press any key to continue.");
                 Console.ReadKey();
                     }
-                    else
+
+                    else//NEW CLAIMS EXIST ELSE
                     {
                 Console.WriteLine($"Claim {nextClaim.ClaimID} has been removed from queue.  There are now no claims in the queue.\n" +
                     $"Press any key to continue.");
                 Console.ReadKey();
                     }
                 }
-            else
+
+            else//DEAL WITH CLAIM ELSE
             {
                 Console.WriteLine("\nYou did not provide y or n. You will now be returned to the Main Menu.\n" +
                     "Press any key to continue\n");
                 Console.ReadKey();
             }
             }
-            else
+
+            else//CLAIMS EXIST ELSE
             {
                 Console.WriteLine("Press any key to continue\n");
                 Console.ReadKey();
