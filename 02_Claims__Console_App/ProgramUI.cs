@@ -15,12 +15,12 @@ namespace _02_Claims__Console_App
             2. Take care of next claim
             3. Enter a new claim
 
-        1 see all claims - in provided format                                               DONE - need to work on format
+        1 see all claims - in provided format                                               DONE
  *              ClaimID Type    Description Amount  DateOfAccident DateOfClaim IsValid
                     1	Car Car accident on 465.	$400.00	4/25/18	4/27/18	true
                     2	Home House fire in kitchen.  $4000.00	4/11/18	4/12/18	true
                     3	Theft Stolen pancakes.    $4.00	4/27/18	6/01/18	false
- *          2 take care of next - show next in queue only
+ *          2 take care of next - show next in queue only                                   DONE
  *                  Here are the details for the next claim to be handled:
                     ClaimID: 1
                     Type: Car
@@ -214,13 +214,18 @@ namespace _02_Claims__Console_App
         {
             Console.Clear();
             Queue<Claim> directory = repo.GetAllClaims();
-
-            Console.WriteLine("ClaimID Type    Description Amount  DateOfAccident DateOfClaim IsValid\n");
+            Console.WriteLine(String.Format("|{0,15}|{1,10}|{2,30}|{3,15}|{4,16}|{5,16}|{6,10}|", 
+                "Claim ID", "Claim Type", "Description", "Amount","Date Of Incident","Date Of Claim","Is Valid"));
+            Console.WriteLine(String.Format("|{0,15}|{1,10}|{2,30}|{3,15}|{4,16}|{5,16}|{6,10}|", 
+                "---------------", "----------", "------------------------------", "---------------", "----------------", "----------------", "----------"));
             foreach (Claim claim in directory)
             {
-                Console.WriteLine($"{claim.ClaimID}   {claim.ClaimType}    {claim.Description}    ${claim.ClaimAmount}    {claim.DateOfIncident.ToShortDateString()}    {claim.DateOfClaim.ToShortDateString()}    {claim.IsValid}\n");
+                Console.WriteLine(String.Format("|{0,15}|{1,10}|{2,30}|{3,15}|{4,16}|{5,16}|{6,10}|", 
+                    $"{claim.ClaimID}", $"{claim.ClaimType}", $"{claim.Description}", $"{claim.ClaimAmount}", $"{claim.DateOfIncident.ToShortDateString()}", $"{claim.DateOfClaim.ToShortDateString()}", $"{claim.IsValid}"));
+                Console.WriteLine(String.Format("|{0,15}|{1,10}|{2,30}|{3,15}|{4,16}|{5,16}|{6,10}|",
+                    "---------------", "----------", "------------------------------", "---------------", "----------------", "----------------", "----------"));
             }
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
 

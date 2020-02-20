@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace _02_Claims_Tests
 {
-    //5. Unit Tests - test all methods
+    //5. Unit Tests - test all methods          DONE
 
     [TestClass]
     public class ClaimsTests

@@ -312,11 +312,13 @@ namespace _03_Badges_Console_App
         {
             Console.Clear();
             Dictionary<string,List<string>> directory = _badgeRepo.GetAllBadges();
-            Console.WriteLine("Badge #     Door Access");
+            Console.WriteLine(String.Format("|{0,15}|{1,30}|","Badge #", "Door Access"));
+            Console.WriteLine(String.Format("|{0,15}|{1,30}|","---------------", "------------------------------"));
             foreach (KeyValuePair<string,List<string>> badge in directory)
             {
                 string listString = string.Join(",", badge.Value.ToArray());
-                Console.WriteLine($"{badge.Key}        {listString}");
+                Console.WriteLine(String.Format("|{0,15}|{1,30}|",$"{badge.Key}", $"{listString}"));
+                Console.WriteLine(String.Format("|{0,15}|{1,30}|","---------------", "------------------------------"));
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
