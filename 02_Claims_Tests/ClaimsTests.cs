@@ -6,7 +6,7 @@ namespace _02_Claims_Tests
 {
     //5. Unit Tests - test all methods
 
-    /*[TestClass]
+    [TestClass]
     public class ClaimsTests
     {
         [TestMethod]
@@ -33,11 +33,11 @@ namespace _02_Claims_Tests
             ClaimRepo repo = new ClaimRepo();
             Claim claim = new Claim("ads", Claim.ClaimTypeOptions.Car, "descr", 124d, new DateTime(2020, 1, 15), new DateTime(2020, 2, 2));
             Claim claimTwo = new Claim("22", Claim.ClaimTypeOptions.Home, "descrtiption", 22234d, new DateTime(1995, 7, 4), new DateTime(1996, 1, 10));
-            Console.WriteLine(repo.AddClaimToRepo(claim)); 
-            Console.WriteLine(repo._claimRepo.Count);
+            Console.WriteLine(repo.AddClaimToRepo(claim)); //true
+            Console.WriteLine(repo._claimRepo.Count); //1
             Assert.IsTrue(repo.AddClaimToRepo(claimTwo));
             Assert.AreEqual(2, repo._claimRepo.Count);
-            Console.WriteLine(repo._claimRepo.Count);
+            Console.WriteLine(repo._claimRepo.Count);//2
         }
         [TestMethod]
         public void GetAllClaimsTests()
@@ -47,25 +47,31 @@ namespace _02_Claims_Tests
             Claim claimTwo = new Claim("22", Claim.ClaimTypeOptions.Home, "descrtiption", 22234d, new DateTime(1995, 7, 4), new DateTime(1996, 1, 10));
             repo.AddClaimToRepo(claim);
             repo.AddClaimToRepo(claimTwo);
-            Console.WriteLine(repo.GetAllClaims().Count);
-            Console.WriteLine(repo.GetAllClaims());
+            Console.WriteLine(repo.GetAllClaims().Count);//2
+            Console.WriteLine(repo.GetAllClaims());//some reference
             Assert.AreEqual(2, repo.GetAllClaims().Count);
         }
-        /*[TestMethod]
-        public void DeQueueNextClaimTests()
+        [TestMethod]
+        public void DisplayNextClaimTests()
         {
             ClaimRepo repo = new ClaimRepo();
             Claim claim = new Claim("ads", Claim.ClaimTypeOptions.Car, "descr", 124d, new DateTime(2020, 1, 15), new DateTime(2020, 2, 2));
             Claim claimTwo = new Claim("22", Claim.ClaimTypeOptions.Home, "descrtiption", 22234d, new DateTime(1995, 7, 4), new DateTime(1996, 1, 10));
             repo.AddClaimToRepo(claim);
             repo.AddClaimToRepo(claimTwo);
-            Console.WriteLine(repo.DeQueueNextClaim());
+            Assert.AreEqual(2, repo._claimRepo.Count);
+            repo.DisplayNextClaim();
+            Assert.AreEqual(2, repo._claimRepo.Count);
+            bool result = repo.DisplayNextClaim();
+            Assert.IsTrue(result);
         }
         [TestMethod]
-        public void MyTestMethod()
+        public void DisplayNextWhenVoidTests()
         {
             ClaimRepo repo = new ClaimRepo();
-            repo._claimRepo.Peek();
+            Assert.AreEqual(0, repo._claimRepo.Count);
+            bool result = repo.DisplayNextClaim();
+            Assert.IsFalse(result);
         }
-    }*/
+    }
 }

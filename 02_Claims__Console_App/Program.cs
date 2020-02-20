@@ -25,7 +25,7 @@ namespace _02_Claims__Console_App
  *      - constructors
  *      - properties: ClaimID, ClaimType (Car, Home, Theft), Description, ClaimAmount, 
  *      DateOfIncident, DateOfClaim, IsValid (based on incident/claim dates)
- * 2. Repo
+ * 2. Repo                                                                                  DONE
  *      - repo list to hold claims - use a queue?
  *      - methods:
  *          1 see all claims - in provided format
@@ -51,15 +51,15 @@ namespace _02_Claims__Console_App
                     Amount of Damage: $2000.00
                     Date Of Accident: 4/27/18
                     Date of Claim: 4/28/18
-                    This claim is valid.
- * 3. ProgramUI - menu method:
+                    This claim is valid.    
+ * 3. ProgramUI - menu method:                                  DONE
  *      - show claims agent a menu
  *      Choose a menu item:
             1. See all claims
             2. Take care of next claim
             3. Enter a new claim
  * 4. Program - runs Menu method                    DONE
- * 5. Unit Tests - test all methods
+ * 5. Unit Tests - test all methods                     DONE
  * 
  * 
  * 

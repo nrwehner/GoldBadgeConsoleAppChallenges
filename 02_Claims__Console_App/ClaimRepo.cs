@@ -10,12 +10,12 @@ namespace _02_Claims__Console_App
      * 2. Repo
  *      - repo list to hold claims - use a queue?                                           DONE
  *      - methods:
- *          1 see all claims - in provided format
+ *          1 see all claims - in provided format                                           DONE
  *              ClaimID Type    Description Amount  DateOfAccident DateOfClaim IsValid
                     1	Car Car accident on 465.	$400.00	4/25/18	4/27/18	true
                     2	Home House fire in kitchen.  $4000.00	4/11/18	4/12/18	true
                     3	Theft Stolen pancakes.    $4.00	4/27/18	6/01/18	false
- *          2 take care of next - show next in queue only
+ *          2 take care of next - show next in queue only                                   DONE
  *                  Here are the details for the next claim to be handled:
                     ClaimID: 1
                     Type: Car
@@ -26,7 +26,7 @@ namespace _02_Claims__Console_App
                     IsValid: True
                 Do you want to deal with this claim now(y/n)? y
                 When the agent presses 'y', the claim will be pulled off the top of the queue. If the agent presses 'n', it will go back to the main menu.
- *          3 enter a new - prompt user to enter values
+ *          3 enter a new - prompt user to enter values                                 DONE
  *                  Enter the claim id: 4
                     Enter the claim type: Car
                     Enter a claim description: Wreck on I-70.
@@ -43,9 +43,35 @@ namespace _02_Claims__Console_App
         {
             return _claimRepo;
         }
-        public void DeQueueNextClaim()
-        {
-            _claimRepo.Dequeue();
+        public bool DisplayNextClaim()
+        {/*
+            Here are the details for the next claim to be handled:
+                    ClaimID: 1
+                    Type: Car
+                    Description: Car Accident on 464.
+                    Amount: $400.00
+                    DateOfAccident: 4/25/18
+                    DateOfClaim: 4/27/18
+                    IsValid: True
+            */
+            if (_claimRepo.Count != 0)
+            {
+                Claim claim = _claimRepo.Peek();
+                Console.WriteLine($"Here are the details for the next claim to be handled:\n" +
+                    $"ClaimID: {claim.ClaimID}\n" +
+                    $"Type: {claim.ClaimType}\n" +
+                    $"Description: {claim.Description}\n" +
+                    $"Amount: ${claim.ClaimAmount}\n" +
+                    $"DateOfAccident: {claim.DateOfIncident.ToShortDateString()}\n" +
+                    $"DateOfClaim: {claim.DateOfClaim.ToShortDateString()}\n" +
+                    $"IsValid: {claim.IsValid}\n");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("There are no claims to display.");
+                return false;
+            }
         }
         public bool AddClaimToRepo(Claim claim)
         {

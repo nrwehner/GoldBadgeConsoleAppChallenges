@@ -8,14 +8,14 @@ using static _02_Claims__Console_App.Claim;
 namespace _02_Claims__Console_App
 {
     /*
-     * 3. ProgramUI - menu method:
+     * 3. ProgramUI - menu method:                                                      DONE
  *      - show claims agent a menu
  *      Choose a menu item:
             1. See all claims
             2. Take care of next claim
             3. Enter a new claim
 
-        1 see all claims - in provided format
+        1 see all claims - in provided format                                               DONE - need to work on format
  *              ClaimID Type    Description Amount  DateOfAccident DateOfClaim IsValid
                     1	Car Car accident on 465.	$400.00	4/25/18	4/27/18	true
                     2	Home House fire in kitchen.  $4000.00	4/11/18	4/12/18	true
@@ -31,7 +31,7 @@ namespace _02_Claims__Console_App
                     IsValid: True
                 Do you want to deal with this claim now(y/n)? y
                 When the agent presses 'y', the claim will be pulled off the top of the queue. If the agent presses 'n', it will go back to the main menu.
- *          3 enter a new - prompt user to enter values
+ *          3 enter a new - prompt user to enter values                                     DONE - make error checking better?
  *                  Enter the claim id: 4
                     Enter the claim type: Car
                     Enter a claim description: Wreck on I-70.
@@ -66,7 +66,7 @@ namespace _02_Claims__Console_App
                         SeeAllClaims();
                         break;
                     case "2":
-                        //TakeCareOfNextClaim();
+                        TakeCareOfNextClaim();
                         break;
                     case "3":
                         EnterNewClaim();
@@ -91,6 +91,16 @@ namespace _02_Claims__Console_App
                 "Enter 2 for Home\n" +
                 "Enter 3 for Theft\n");
             string userClaimType = Console.ReadLine();
+
+            if(userClaimType != "1" && userClaimType != "2" && userClaimType != "3")//CLAIMTYPE ENTRY IF
+            {
+                Console.WriteLine("You did not provide 1, 2, or 3.  You will return to the Main Menu now.\n" +
+                    "Press any key to continue");
+                Console.ReadLine();
+            }
+
+            else//CLAIMTYPE ENTRY ELSE
+            {
             int claimTypeID = int.Parse(userClaimType);
             claim.ClaimType = (ClaimTypeOptions)claimTypeID;
             //public enum ClaimTypeOptions { Car = 1, Home, Theft };
@@ -98,38 +108,107 @@ namespace _02_Claims__Console_App
             Console.WriteLine("Enter a Claim Description:");
             claim.Description = Console.ReadLine();
             Console.Clear();
-            Console.WriteLine("Amount of Damage:\n" +
-                "$");
+            Console.WriteLine("Amount of Damage:\n");
+                Console.Write("$");
             string damageAmount = Console.ReadLine();
             claim.ClaimAmount = Convert.ToDouble(damageAmount);
             Console.Clear();
             Console.WriteLine("Date of Accident:");
-            Console.Write("Enter a month: ");
+            Console.Write("Enter a month (1 - 12): ");
             int month = int.Parse(Console.ReadLine());
-            Console.Write("Enter a day: ");
+            Console.Write("Enter a day (1 - 31 depending on month): ");
             int day = int.Parse(Console.ReadLine());
-            Console.Write("Enter a year: ");
+            Console.Write("Enter a year (ie 2020): ");
             int year = int.Parse(Console.ReadLine());
-            claim.DateOfIncident = new DateTime(year, month, day);
+            DateTime userIncidentDate = new DateTime(year, month, day);
+
+           if(userIncidentDate < new DateTime(1900,1,1) || userIncidentDate > DateTime.Now)//INCIDENTDATE ENTRY IF
+                {
+                    Console.WriteLine($"{userIncidentDate.ToShortDateString()} is not a valid Incident Date. You will return to the Main Menu now to start over.\n" +
+                        "Press any key to continue.");
+                    Console.ReadKey();
+                }
+
+           else //INCIDENTDATE ENTRY ELSE
+                { 
+                claim.DateOfIncident = userIncidentDate;
             Console.Clear();
             Console.WriteLine("Date of Claim:");
-            Console.Write("Enter a month: ");
+            Console.Write("Enter a month (1 - 12): ");
             int monthClaim = int.Parse(Console.ReadLine());
-            Console.Write("Enter a day: ");
+            Console.Write("Enter a day (1 - 31 depending on month): ");
             int dayClaim = int.Parse(Console.ReadLine());
-            Console.Write("Enter a year: ");
+            Console.Write("Enter a year (ie 2020): ");
             int yearClaim = int.Parse(Console.ReadLine());
-            claim.DateOfClaim = new DateTime(yearClaim, monthClaim, dayClaim);
+            DateTime userClaimDate = new DateTime(yearClaim, monthClaim, dayClaim);
+           if(userClaimDate < userIncidentDate || userClaimDate > DateTime.Now)//CLAIMDATE ENTRY IF
+            {
+                        Console.WriteLine($"{userClaimDate.ToShortDateString()} is not a valid Claim Date for an Incident Date of {userIncidentDate.ToShortDateString()}.\n" +
+                            $"You will return to the Main Menu now to start over.\n" +
+                        "Press any key to continue.");
+                        Console.ReadKey();
+             }
+           else//CLAIMDATE ENTRY ELSE
+            {
+                claim.DateOfClaim = userClaimDate;
             repo.AddClaimToRepo(claim);
             Console.WriteLine((claim.IsValid) ? "The Claim is Valid" : "The Claim is Not Valid");
             Console.WriteLine("Your item has been added to the menu, press any key to continue.");
             Console.ReadKey();
+             }
+            }
+           }
         }
+
+        /*
+         *  Do you want to deal with this claim now(y/n)? y
+                When the agent presses 'y', the claim will be pulled off the top of the queue. If the agent presses 'n', it will go back to the main menu.
+         * */
         public void TakeCareOfNextClaim()
         {
             Console.Clear();
-            Console.WriteLine("Here are the details for the next claim to be handled:");
-            repo._claimRepo.Peek();
+            bool areClaims = repo.DisplayNextClaim();
+            if (areClaims)
+            {
+            Console.WriteLine("\nDo you want to deal with this claim now (y/n)?\n");
+            string userChoice = Console.ReadLine();
+            if (userChoice == "n")
+            {
+                Claim nextClaim = repo._claimRepo.Peek();
+                Console.WriteLine($"Claim {nextClaim.ClaimID} will remain next in queue.  Press any key to continue.");
+                Console.ReadKey();
+            }
+            else if (userChoice == "y")
+            {
+                Claim nextClaim = repo._claimRepo.Peek();
+                repo._claimRepo.Dequeue();
+                bool areThereClaims = (repo._claimRepo.Count != 0) ? true : false;
+                    if (areThereClaims)
+                    {
+                Claim newNextClaim = repo._claimRepo.Peek();
+                Console.WriteLine($"Claim {nextClaim.ClaimID} has been removed from queue.  The next claim is now claim {newNextClaim.ClaimID}.\n" +
+                    $"Press any key to continue.");
+                Console.ReadKey();
+                    }
+                    else
+                    {
+                Console.WriteLine($"Claim {nextClaim.ClaimID} has been removed from queue.  There are now no claims in the queue.\n" +
+                    $"Press any key to continue.");
+                Console.ReadKey();
+                    }
+                }
+            else
+            {
+                Console.WriteLine("\nYou did not provide y or n. You will now be returned to the Main Menu.\n" +
+                    "Press any key to continue\n");
+                Console.ReadKey();
+            }
+            }
+            else
+            {
+                Console.WriteLine("Press any key to continue\n");
+                Console.ReadKey();
+            }
         }
         public void SeeAllClaims()
         {
@@ -139,11 +218,10 @@ namespace _02_Claims__Console_App
             Console.WriteLine("ClaimID Type    Description Amount  DateOfAccident DateOfClaim IsValid\n");
             foreach (Claim claim in directory)
             {
-                Console.WriteLine($"{claim.ClaimID}   {claim.ClaimType}    {claim.Description}    ${claim.ClaimAmount}    {claim.DateOfIncident}    {claim.DateOfClaim}    {claim.IsValid}\n");
+                Console.WriteLine($"{claim.ClaimID}   {claim.ClaimType}    {claim.Description}    ${claim.ClaimAmount}    {claim.DateOfIncident.ToShortDateString()}    {claim.DateOfClaim.ToShortDateString()}    {claim.IsValid}\n");
             }
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
-
         }
 
         /*
