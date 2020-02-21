@@ -20,7 +20,7 @@ namespace _04_Company_Outings_Console_App
 /*
  * My Summary:
  * 
- * Outing Class
+ * Outing Class                                                 DONE
  *      Type Prop
  *      Attendance Prop
  *      Date Prop

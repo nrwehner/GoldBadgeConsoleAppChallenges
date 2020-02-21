@@ -44,7 +44,13 @@ namespace _02_Claims__Console_App
     {
         ClaimRepo repo = new ClaimRepo();
         public bool isRunning = true;
+
         public void Run()
+        {
+            SeedContent();
+            RunMenu();
+        }
+        public void RunMenu()
         {
             while (isRunning)
             {
@@ -242,6 +248,17 @@ namespace _02_Claims__Console_App
                 2	Home House fire in kitchen.  $4000.00	4/11/18	4/12/18	true
                 3	Theft Stolen pancakes.    $4.00	4/27/18	6/01/18	false
          * */
+
+        public void SeedContent()
+        {
+            Claim claimOne = new Claim("123",ClaimTypeOptions.Car,"I can't believe this happened!",2000,new DateTime(2020,1,1),new DateTime(2020,1,10));
+            repo.AddClaimToRepo(claimOne);
+            Claim claimTwo = new Claim("124", ClaimTypeOptions.Theft, "People really steal stuff?!", 2500, new DateTime(2019, 12, 20), new DateTime(2019, 12, 22));
+            repo.AddClaimToRepo(claimTwo);
+            Claim claimThree = new Claim("125", ClaimTypeOptions.Home, "Why did I ever buy a home!?", 15000, new DateTime(2019, 10,22), new DateTime(2019, 11, 24));
+            repo.AddClaimToRepo(claimThree);
+        }
+
     }
 }
 

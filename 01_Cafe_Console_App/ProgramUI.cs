@@ -16,7 +16,13 @@ namespace _01_Cafe_Console_App
     {
         Repo repo = new Repo();
         public bool isRunning = true;
+
         public void Run()
+        {
+            SeedContent();
+            RunMenu();
+        }
+        public void RunMenu()
         {
             while (isRunning)
             {
@@ -126,6 +132,15 @@ namespace _01_Cafe_Console_App
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+        }
+        public void SeedContent()
+        {
+            MenuItem burger = new MenuItem("1","Burger","it is delicious","pickles, tomatoes,lettuce","3.95");
+            repo.AddNewMenuItem(burger);
+            MenuItem tacos = new MenuItem("2", "tacos", "they come piping hot!", "sour cream, guacamole, tomatoes, lettuce", "4.95");
+            repo.AddNewMenuItem(tacos);
+            MenuItem salad = new MenuItem("3", "salad", "oh so good for you", "cheese, tomatoes, cucumbers, croutons", "3.55");
+            repo.AddNewMenuItem(salad);
         }
     }
 }

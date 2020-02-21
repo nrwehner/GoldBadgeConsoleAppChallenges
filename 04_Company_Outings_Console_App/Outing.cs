@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace _04_Company_Outings_Console_App
 {
     /*
-     * Outing Class
- *      Type Prop
- *      Attendance Prop
- *      Date Prop
- *      CostPerPerson Prop - Calc only based on TotalCost
- *      TotalCost Prop
+     * Outing Class                                         DONE
+     *  Constructors                                        DONE
+ *      Type Prop (with enum)                               DONE
+ *      Attendance Prop                                     DONE
+ *      Date Prop                                           DONE
+ *      CostPerPerson Prop - Calc only based on TotalCost   DONE
+ *      TotalCost Prop                                      DONE
      * */
     public class Outing
     {

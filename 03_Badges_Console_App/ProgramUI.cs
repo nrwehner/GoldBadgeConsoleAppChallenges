@@ -58,6 +58,12 @@ namespace _03_Badges_Console_App
         BadgeRepo _badgeRepo = new BadgeRepo();
         public bool isRunning = true;
 
+        public void Run()
+        {
+            SeedContent();
+            RunMenu();
+        }
+
         public void RunMenu()
         {
             while (isRunning)
@@ -353,6 +359,15 @@ namespace _03_Badges_Console_App
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+        }
+        public void SeedContent()
+        {
+            Badge badgeOne = new Badge("11111",new List<string>() {"1","1a","1b","2c"});
+            _badgeRepo.AddBadgeToRepo(badgeOne);
+            Badge badgeTwo = new Badge("11112", new List<string>() { "1", "1b", "1d", "2a" });
+            _badgeRepo.AddBadgeToRepo(badgeTwo);
+            Badge badgeThree = new Badge("11113", new List<string>() { "1", "1c", "1f", "2c","3","3a" });
+            _badgeRepo.AddBadgeToRepo(badgeThree);
         }
     }
 }

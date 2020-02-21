@@ -8,7 +8,7 @@ namespace _04_Company_Outings_Console_App
 {
     /*
      * ProgramUI
- *      Run Method
+ *      Run Method                                              DONE
  *      CW and CR Wrapping methods
  *          Display all outings
  *          Add outings to repo

@@ -11,7 +11,7 @@ namespace _03_Badges_Console_App
         static void Main(string[] args)
         {
             ProgramUI ui = new ProgramUI();
-            ui.RunMenu();
+            ui.Run();
         }
     }
 }
